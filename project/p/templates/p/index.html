@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phân loại cảm xúc người dùng</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .font-title{
+            color: #26a69a;
+            font-size: 20px;
+            font-family: arial, monospace;
+            font-weight: bold;
+        }
+        body{
+            font-family: arial, monospace;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center pt-4" style="color:#2196F3">Phân tích cảm xúc người dùng</h1>
+        <hr class="pt-4">
+        <div class="row pt-4">
+            <div class="col-4 ">
+                <div class="pb-3 font-title">Nhập bình luận</div>
+                <form action="" method="post">
+                   {% csrf_token %}
+                    <textarea cols="60" rows="10" required name="comment" type="text">
+                        {% if comment != None %}
+                            {{ comment.strip }}
+                        {% endif %}
+                    </textarea>
+                    <button type="submit" class="btn btn-primary">Dự đoán</button>
+                </form>
+
+            </div>
+            <div class="col-4 offset-2">
+                <div class="pb-3 font-title">Kết quả:
+                    {% if result == 1 %}
+                        <span class="text-primary">Tích cực</span>
+                    {% elif result == 0 %}
+                        <span class="text-danger">Tiêu cực</span>
+                    {% endif %}
+                </div>
+                <textarea cols="60" rows="10">
+                    {% if prepare_data != None %}
+                        {{ prepare_data }}
+                    {% endif %}
+                </textarea>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
